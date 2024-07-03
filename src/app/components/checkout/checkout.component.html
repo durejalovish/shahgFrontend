@@ -1,0 +1,141 @@
+<br />
+<div>
+<div style="margin-left: auto; margin-right: auto; width: 44%;">
+  <h3 class="setHeight">Enter Customer name</h3>
+  <input type="text" (change)="onNameChange($event)" class="setHeight">
+  <br/>
+  <h3 class="setHeight" style="margin-top: 10px;">Address</h3>
+  <input type="text" (change)="onAddressChange($event)" class="setHeight">
+  <br/>
+  <h3 class="setHeight" style="margin-top: 10px;">Phone Number</h3>
+  <input type="text" (change)="onPhoneChange($event)" class="setHeight">
+  <br/>
+  <h3 class="setHeight" style="margin-top: 10px;">Additional Message</h3>
+  <input type="text" (change)="onMessageChange($event)" class="setHeight">
+
+  <h3 class="setHeight" style="margin-top: 10px;">Enter VIN</h3>
+  <input type="text" (change)="onVINChange($event)" class="setHeight">
+
+  <h3 class="setHeight" style="margin-top: 10px;">Include OTS</h3>Yes
+  <input class="form-check-input" type="radio"
+   name="gob"  [(ngModel)]="includeOTS" [value]="true" />
+   No
+  <input class="form-check-input" type="radio"
+   name="gob" [(ngModel)]="includeOTS" [value]="false"  />
+  <br/>
+
+  <h3 class="setHeight" style="margin-top: 10px;">Payment Credit Card</h3>Yes
+  <input class="form-check-input" type="radio"
+   name="gob" [value]="true" (change)="onCreditCardChanges(true)"/>
+   No
+  <input class="form-check-input" type="radio"
+   name="gob" [value]="false" (change)="onCreditCardChanges(false)" />
+</div>
+
+<div id="invoice-container" class="invoice-container">
+    <div class="invoice-header">
+      <div class="col-md-12">
+        <div class="col-md-10">
+          <div class="logo">
+            <img  src="../../../assets/images/shahGLogo.jpg"/>
+          </div>
+          <div style="font-size: 20px; float: left;"><b>SHAH G RIM & TIRES</b></div>
+        </div>
+        
+        <div class="col-md-2">
+         
+        </div>
+        
+        
+      </div>
+      
+      <br/>
+      <div class="setHeight">68 Eastern Ave, Unit #3</div>
+      <div class="setHeight">Brampton, ON L6W 1X8</div>
+      <div class="setHeight">+1 (518) 880-9991</div>
+      <div class="setHeight">shahgtires@gmail.com</div>
+      <div class="setHeight">HST (ON) Registration No:</div>
+      <div class="setHeight">780820825 RC0001</div>
+    </div>
+    
+    <div class="invoice-header">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4" style="width: 50%;float: left;">
+            <div>Customer Name: {{ customerName}}</div>
+            <div>{{ address}}</div>
+            <div>{{ phoneNumber }}</div>
+            <div>{{ addionalMessage }}</div>
+            <div>{{ vehicleVIN }}</div>
+          </div>
+          <div class="col-md-4">
+            <div style="display: flex;flex-direction: row-reverse;">Invoice Number: INV {{invoiceNumber}}</div>
+            <div style="display: flex;flex-direction: row-reverse;" >Date:  2024/01/10</div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Brand</th>
+          <th>Number of Items</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productListing.items.rims">
+          <td>{{ item.size }}</td>
+          <td>{{item.brandName}}</td>
+          <td>{{ item.number_of_items }}</td>
+          <td>{{ item.price }}</td>
+          <td>${{ item.number_of_items * item.price }}</td>
+        </tr>
+        <tr *ngFor="let item of productListing.items.tires">
+          <td>{{ item.size }}</td>
+          <td>{{item.brandName}}</td>
+          <td>{{ item.number_of_items }}</td>
+          <td>{{ item.price }}</td>
+          <td>${{ item.number_of_items * item.price }}</td>
+        </tr>
+        <tr  *ngIf="includeOTS">
+          <td>O.T.S($4.50)</td>
+          <td></td>
+          <td>{{totalItems}}</td>
+          <td>4.50</td>
+          <td>${{ 4.50 * totalItems}} </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="invoice-total">
+      <div>Subtotal: {{ getSubtotal() | currency:'CAD':'symbol':'1.2-2' }}</div>
+      <div>Tax ({{ (taxRate * 100) + '%' }}): {{ getTax() | currency:'CAD':'symbol':'1.2-2' }}</div>
+      <div>Total Amount: {{ getTotalAmount() | currency:'CAD':'symbol':'1.2-2' }}</div>
+    </div>
+    
+    <div style="margin-left: 500px;margin-top: 150px;">
+     
+      <p style="float: left;margin-top: -20px;">Signature:</p>
+      <hr>
+    </div>
+    <div style="margin-top: 150px;"> 
+      <div><b>TERMS & CONDITIONS</b></div>
+      <div>1. No returns/exchange, if mounted.</div>
+      <div>2. 1 year manufacture warranty, road hazard is not included.</div>
+      <div>3. Physical or any damage on sidewall will not be covered.</div>
+      <div>4. Please check your lock key after getting your car back from service. </div>
+      <div>5. Comeback after 100km of service for re-torque.</div>
+      <div>6. A surcharge of 2.6% will be applied to all transactions made using a credit card</div>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 25px;">
+    <div class="col-md-12">
+      <div class="col-md-4" style="margin-left: auto; margin-right: auto; width: 44%;">
+        <button (click)="generatePDF()">Generate PDF</button>
+      </div>
+    </div>  
+  </div>
+  
+</div>
