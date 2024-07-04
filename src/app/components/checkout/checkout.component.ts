@@ -99,8 +99,9 @@ export class CheckoutComponent {
   }
 
   updateTires(){
+    //console.log(this.productListing.items.tires, "tires");
     this.productListing.items.tires.forEach( (element:any) => {
-      element.quantity = element.number_of_items;
+      element.quantity =element.quantity - element.number_of_items;
       this.employeeService
       .updateTires(element)
       .subscribe({
@@ -114,13 +115,13 @@ export class CheckoutComponent {
       });
     })
     this.productListing.items.rims.forEach( (element:any) => {
-      element.quantity = element.number_of_items;
+      element.quantity = element.quantity - element.number_of_items;
       this.employeeService
       .updateRims(element)
       .subscribe({
         next: (value) => {
           // this.dialogRef.close(true);
-          this.router.navigateByUrl('invoices/product_screen');
+          this.userEntry();
         },
         error: (err) => {
           console.log(err);
@@ -142,12 +143,13 @@ export class CheckoutComponent {
         "invoiceNumber": this.invoiceNumber,
         "invoiceType": "Taxed Invoice"
       }
+     // console.log(userObject, "userObject");
       this.employeeService
       .addNewInvoice(userObject)
       .subscribe({
         next: (value) => {
           // this.dialogRef.close(true);
-          this.router.navigateByUrl('invoices');
+          this.router.navigateByUrl('');
         },
         error: (err) => {
           console.log(err);
