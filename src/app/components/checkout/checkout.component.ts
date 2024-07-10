@@ -114,6 +114,7 @@ export class CheckoutComponent {
         },
       });
     })
+    console.log(this.productListing, "print the product listing here");
     this.productListing.items.rims.forEach( (element:any) => {
       element.quantity = element.quantity - element.number_of_items;
       this.employeeService

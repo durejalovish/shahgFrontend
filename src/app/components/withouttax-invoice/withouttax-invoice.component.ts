@@ -98,7 +98,7 @@ export class WithouttaxInvoiceComponent {
   updateTires(){
     this.productListing.items.tires.forEach( (element:any) => {
       console.log("this.productLiting", this.productListing);
-      element.quantity = element.number_of_items;
+      element.quantity = element.quantity - element.number_of_items;
       console.log("element", element);
       this.employeeService
       .updateTires(element)
@@ -113,8 +113,22 @@ export class WithouttaxInvoiceComponent {
         },
       });
     })
+    this.productListing.items.rims.forEach( (element:any) => {
+      element.quantity = element.quantity - element.number_of_items;
+      this.employeeService
+      .updateRims(element)
+      .subscribe({
+        next: (value) => {
+          // this.dialogRef.close(true);
+          this.userEntry();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    })
     };
-
+    
     userEntry(){
       const userObject = {
         "customerName":this.customerName,
@@ -123,7 +137,7 @@ export class WithouttaxInvoiceComponent {
         "productListing": this.productListing,
         "additionalMessage": this.addionalMessage,
         "vehicleVIN": this.vehicleVIN,
-        "totalOTS": this.getOTS(),
+        "totalOTS": this.includeOTS ? this.getOTS() : null,
         "totalAmount": this.getSubtotal(),
         "invoiceNumber": this.invoiceNumber,
         "invoiceType": "withoutTax"
