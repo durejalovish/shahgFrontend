@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 
 export class EmployeeService {
-   apiUrl = "http://localhost:8081";
-  //apiUrl = "https://shahgtiresbackend-3a82bf11dc3f.herokuapp.com"
+  // apiUrl = "http://localhost:8081";
+  apiUrl = "https://shahgtiresbackend-3a82bf11dc3f.herokuapp.com"
   
   constructor(private http: HttpClient) {}
 
