@@ -71,7 +71,14 @@ export class WithouttaxInvoiceComponent {
 
   generatePDF() {
     const element = document.getElementById('invoice-container');
-    html2pdf(element);
+    var opt = {
+      margin:       [0, 0.5, 0, 0.5],
+      filename:     'invoice.pdf',
+      image:        { type: 'jpeg', quality: 1.0 },
+      html2canvas:  { scale: 3 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf(element,opt);
     this.updateTires();
   }
 
@@ -105,8 +112,7 @@ export class WithouttaxInvoiceComponent {
       .subscribe({
         next: (value) => {
           // this.dialogRef.close(true);
-          this.userEntry();
-          this.router.navigateByUrl('product_screen');
+         
         },
         error: (err) => {
           console.log(err);
@@ -120,13 +126,14 @@ export class WithouttaxInvoiceComponent {
       .subscribe({
         next: (value) => {
           // this.dialogRef.close(true);
-          this.userEntry();
+         
         },
         error: (err) => {
           console.log(err);
         },
       });
     })
+    this.userEntry();
     };
     
     userEntry(){

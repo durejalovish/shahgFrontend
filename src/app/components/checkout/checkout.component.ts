@@ -69,7 +69,14 @@ export class CheckoutComponent {
 
   generatePDF() {
     const element = document.getElementById('invoice-container');
-    html2pdf(element);
+    var opt = {
+      margin:       [0, 0.5, 0, 0.5],
+      filename:     'invoice.pdf',
+      image:        { type: 'jpeg', quality: 1.0 },
+      html2canvas:  { scale: 3 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf(element,opt);
     this.updateTires();
   }
 
@@ -106,7 +113,6 @@ export class CheckoutComponent {
       .updateTires(element)
       .subscribe({
         next: (value) => {
-          this.userEntry();
           // this.dialogRef.close(true);
         },
         error: (err) => {
@@ -122,14 +128,14 @@ export class CheckoutComponent {
       .subscribe({
         next: (value) => {
           // this.dialogRef.close(true);
-          this.userEntry();
         },
         error: (err) => {
           console.log(err);
         },
       });
     })
-    };
+    this.userEntry();
+  };
 
     userEntry(){
       const userObject = {

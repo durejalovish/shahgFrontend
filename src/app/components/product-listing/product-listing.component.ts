@@ -133,7 +133,6 @@ export class ProductListingComponent {
      this.productListing.rims.push(row);
      this.snackbar.openSnackBar('Products has been added', 'Done');
      console.log("products listing", this.productListing);
-
    }
  }
 

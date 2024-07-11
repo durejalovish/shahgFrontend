@@ -80,6 +80,7 @@
         <tr>
           <th>Service</th>
           <th>Brand</th>
+          <th>Pattern</th>
           <th>Number of Items</th>
           <th>Price</th>
           <th>Total</th>
@@ -89,6 +90,7 @@
         <tr *ngFor="let item of productListing.items.rims">
           <td>{{ item.size }}</td>
           <td>{{item.brandName}}</td>
+          <td>{{ item.pattern }}</td>
           <td>{{ item.number_of_items }}</td>
           <td>{{ item.price }}</td>
           <td>${{ item.number_of_items * item.price }}</td>
@@ -96,6 +98,7 @@
         <tr *ngFor="let item of productListing.items.tires">
           <td>{{ item.size }}</td>
           <td>{{item.brandName}}</td>
+          <td>{{ item.pattern }}</td>
           <td>{{ item.number_of_items }}</td>
           <td>{{ item.price }}</td>
           <td>${{ item.number_of_items * item.price }}</td>
