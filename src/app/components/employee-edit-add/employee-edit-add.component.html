@@ -78,8 +78,8 @@
                   <label style="margin-top: 10px; font-size: 18px;">Select Pattern</label>
                   <select  (change)="typeChange($event)"  formControlName="pattern" style="margin: 10px; height: 32px;width: 120px; margin-top: 10px;">
                     <option value="Snow">Snow Tires</option>
-                    <option value="AllSeason">All Season</option>
-                    <option value="AllSeason">All Weather</option>
+                    <option value="All Season">All Season</option>
+                    <option value="All Weather">All Weather</option>
                   </select>
                   <div
                     *ngIf="tireForm.controls.pattern.invalid && (tireForm.controls.pattern.dirty || tireForm.controls.pattern.touched) && formDir.submitted">
